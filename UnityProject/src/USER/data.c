@@ -65,23 +65,23 @@ uint16_t Data_getRelayState(RelayBits relayBit)
 		return dataParam.dataRelay.relay >> relayBit;
 }
 
-void Data_setCurrentFunction(pFunction newFunc)
+void Data_setCurrentFunState(SigFunState newFunc)
 {
-	dataParam.funcRun.CurrentFunction = newFunc;
+	dataParam.funcRun.CurrentFunState = newFunc;
 }
 
-pFunction Data_getCurrentFunction(void)
+SigFunState Data_getCurrentFunState(void)
 {
-	return dataParam.funcRun.CurrentFunction;
+	return dataParam.funcRun.CurrentFunState;
 }
 
-pFunction Data_getPreFunction(void)
+SigFunState Data_getPreFunState(void)
 {
-	return dataParam.funcRun.preFunction;
+	return dataParam.funcRun.preFunState;
 }
 
-void Data_setPreFunction(pFunction newFunc)
+void Data_setPreFunState(SigFunState newFunc)
 {
-	dataParam.funcRun.preFunction = newFunc;
+	dataParam.funcRun.preFunState = newFunc;
 }
 

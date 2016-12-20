@@ -1,7 +1,6 @@
 #include "cominc.h"
 
-
-uint8_t Que_create(uint16_t len, void* data, QueueStruct* queue)
+uint8_t Que_create(uint8_t len, void* data, QueueStruct* queue)
 {
 	queue->in = 0;
 	queue->out = 0;
@@ -44,5 +43,13 @@ uint8_t Que_pop(QueueStruct* queue, void* dst)
 	memcpy(dst, queue->buff, queue->dataLen);
 	queue->out = (queue->out+1)%queue->maxSize;
 	queue->qlength--;
+	return TRUE;
+}
+
+uint8_t Que_get(QueueStruct* queue, void* dst)
+{
+	if (IsEmpty(queue))
+		return FALSE;
+	memcpy(dst, queue->buff, queue->dataLen);
 	return TRUE;
 }

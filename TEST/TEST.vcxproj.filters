@@ -48,23 +48,17 @@
     <ClCompile Include="tests\test_runners\UserRunners\DataTest_runner.c">
       <Filter>源文件\test_runners\BspRunner</Filter>
     </ClCompile>
-    <ClCompile Include="tests\testUser\ControllerStateTest.c">
-      <Filter>源文件\testUser</Filter>
-    </ClCompile>
     <ClCompile Include="tests\testUser\QueueStateTest.c">
       <Filter>源文件\testUser</Filter>
-    </ClCompile>
-    <ClCompile Include="tests\test_runners\UserRunners\ControllerStateTest_runner.c">
-      <Filter>源文件\test_runners\BspRunner</Filter>
     </ClCompile>
     <ClCompile Include="tests\test_runners\UserRunners\QueueTest_runner.c">
       <Filter>源文件\test_runners\BspRunner</Filter>
     </ClCompile>
-    <ClCompile Include="tests\testUser\ModeStateTest.c">
-      <Filter>源文件\testUser</Filter>
-    </ClCompile>
-    <ClCompile Include="tests\test_runners\UserRunners\ModeStateTest_runner.c">
+    <ClCompile Include="tests\test_runners\UserRunners\CoreStateTest_runner.c">
       <Filter>源文件\test_runners\BspRunner</Filter>
+    </ClCompile>
+    <ClCompile Include="tests\testUser\CoreStateTest.c">
+      <Filter>源文件\testUser</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

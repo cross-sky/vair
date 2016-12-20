@@ -11,17 +11,17 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\USER\ControllerState.c" />
+    <ClCompile Include="src\USER\CoreState.c" />
     <ClCompile Include="src\USER\data.c" />
-    <ClCompile Include="src\USER\ModeState.c" />
     <ClCompile Include="src\USER\queue.c" />
+    <ClCompile Include="src\USER\RunFunctions.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="inc\cominc.h" />
-    <ClInclude Include="inc\ControllerState.h" />
+    <ClInclude Include="inc\CoreState.h" />
     <ClInclude Include="inc\data.h" />
-    <ClInclude Include="inc\ModeState.h" />
     <ClInclude Include="inc\queue.h" />
+    <ClInclude Include="inc\RunFunctions.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{A9EFD90D-AB0A-45BE-80EB-4DAC3FDEA26B}</ProjectGuid>

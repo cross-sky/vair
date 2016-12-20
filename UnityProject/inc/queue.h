@@ -10,14 +10,14 @@ typedef struct
 	uint8_t out;
 	uint8_t qlength;
 	uint8_t maxSize;
-	uint8_t dataLen;
+	uint16_t dataLen;
 	void* buff;
 }QueueStruct;
 
-uint8_t  Que_create(uint16_t len, void* data, QueueStruct* queue);
+uint8_t  Que_create(uint8_t len, void* data, QueueStruct* queue);
 uint8_t Que_push(void* data, uint16_t dataLen, QueueStruct* queue);
 uint8_t Que_pop(QueueStruct* queue, void* dst);
-
+uint8_t Que_get(QueueStruct* queue, void* dst);
 
 #endif
 

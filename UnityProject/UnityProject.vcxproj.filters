@@ -24,13 +24,13 @@
     <ClCompile Include="src\USER\data.c">
       <Filter>源文件\USER</Filter>
     </ClCompile>
-    <ClCompile Include="src\USER\ControllerState.c">
-      <Filter>源文件\USER</Filter>
-    </ClCompile>
     <ClCompile Include="src\USER\queue.c">
       <Filter>源文件\BSP</Filter>
     </ClCompile>
-    <ClCompile Include="src\USER\ModeState.c">
+    <ClCompile Include="src\USER\CoreState.c">
+      <Filter>源文件\USER</Filter>
+    </ClCompile>
+    <ClCompile Include="src\USER\RunFunctions.c">
       <Filter>源文件\USER</Filter>
     </ClCompile>
   </ItemGroup>
@@ -41,13 +41,13 @@
     <ClInclude Include="inc\cominc.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="inc\ControllerState.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="inc\queue.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="inc\ModeState.h">
+    <ClInclude Include="inc\CoreState.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="inc\RunFunctions.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

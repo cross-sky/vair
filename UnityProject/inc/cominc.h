@@ -16,7 +16,10 @@ void __dsb(uint8_t);
 
 #include "data.h"
 #include "queue.h"
-#include "ModeState.h"
-#include "ControllerState.h"
+#include "RunFunctions.h"
+//#include "ModeState.h"
+#include "CoreState.h"
+//#include "ControllerState.h"
 
 #endif
+

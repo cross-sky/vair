@@ -96,14 +96,12 @@
   <ItemGroup>
     <ClCompile Include="..\UnityComm\unity.c" />
     <ClCompile Include="..\UnityComm\unity_fixture.c" />
-    <ClCompile Include="tests\testUser\ControllerStateTest.c" />
+    <ClCompile Include="tests\testUser\CoreStateTest.c" />
     <ClCompile Include="tests\testUser\DataTest.c" />
-    <ClCompile Include="tests\testUser\ModeStateTest.c" />
     <ClCompile Include="tests\testUser\QueueStateTest.c" />
     <ClCompile Include="tests\test_runners\all_tests.c" />
-    <ClCompile Include="tests\test_runners\UserRunners\ControllerStateTest_runner.c" />
+    <ClCompile Include="tests\test_runners\UserRunners\CoreStateTest_runner.c" />
     <ClCompile Include="tests\test_runners\UserRunners\DataTest_runner.c" />
-    <ClCompile Include="tests\test_runners\UserRunners\ModeStateTest_runner.c" />
     <ClCompile Include="tests\test_runners\UserRunners\QueueTest_runner.c" />
   </ItemGroup>
   <ItemGroup>
