@@ -16,8 +16,10 @@ TEST_TEAR_DOWN(CoreStateTest)
 
 TEST(CoreStateTest, offToOn)
 {
-	CoreState_setNewStateFlag(1);
-	CoreState_setNewState(SIG_FUN_ON);
+//	CoreState_setNewStateFlag(1);
+	SigFunState newState = SIG_FUN_ON;
+	CoreState_pushStateQue(&newState);
+	//CoreState_setNewState(SIG_FUN_ON);
 
 	CoreState_coreFun();
 	TEST_ASSERT_EQUAL(FUN_STATE_INIT, CoreState_getFunSwitchState());

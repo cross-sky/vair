@@ -9,6 +9,32 @@ static SigFunState _newState;
 
 static pFunction _tempFun ;
 
+#define Qlen 10
+SigFunState buf[Qlen];
+QueueStruct xQueue ;
+
+void* getQueBufAddr(void)
+{
+	return &buf[(xQueue.in+1)%xQueue.maxSize];
+}
+
+uint8_t CoreState_pushStateQue(void* srcData)
+{
+	return Que_push(srcData, sizeof(SigFunState), &xQueue,getQueBufAddr());
+}
+
+uint8_t CoreState_popStateQue(void* dstData)
+{
+	return Que_pop(&xQueue, dstData);
+}
+
+uint8_t CoreState_getStateQue(void* dstData)
+{
+	return Que_get(&xQueue, dstData);
+}
+
+
+
 void CoreState_setFunChangeFlag(StateEnum newState)
 {
 	_funChangeFlag = newState;
@@ -76,7 +102,8 @@ void setRunfun(StateEnum state)
 }
 uint16_t CoreState_haveNewStateFlag(void)
 {
-	return _haveNewStateFlag;
+	//return _haveNewStateFlag;
+	return Que_queLength(&xQueue);
 }
 
 void CoreState_setNewStateFlag(uint8_t newFlag)
@@ -86,7 +113,10 @@ void CoreState_setNewStateFlag(uint8_t newFlag)
 
 SigFunState CoreState_getNewState(void)
 {
-	return _newState;
+	//return _newState;
+	SigFunState dst;
+	CoreState_popStateQue(&dst);
+	return dst;
 }
 void CoreState_setNewState(SigFunState newState)
 {
@@ -128,11 +158,12 @@ void CoreState_coreFun(void)
 		setRunfun(CoreState_getFunSwitchState());
 	}
 	CoreState_setFunSwitchState(runTempFun());
-	//runTempFun();
 }
 
 void CoreState_init(void)
 {
+	//1.create queue,len 10, uin16_t
+	Que_create(Qlen, (uint8_t *)&buf, &xQueue);
 	_tempFun = RunFun_getRunFun(SIG_FUN_OFF).run;
 }
 

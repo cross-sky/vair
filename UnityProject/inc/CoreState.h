@@ -9,5 +9,7 @@ void CoreState_coreFun(void);
 void CoreState_init(void);
 void CoreState_setNewStateFlag(uint8_t newFlag);
 void CoreState_setNewState(SigFunState newState);
+
+uint8_t CoreState_pushStateQue(void* srcData);
 #endif
 
