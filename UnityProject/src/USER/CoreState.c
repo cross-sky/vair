@@ -2,8 +2,8 @@
 
 //初始状态设置转换完成
 static StateEnum _funSwitchState = FUN_STATE_RUN;
-static StateEnum _funChangeFlag = FUN_STATE_DONE;
-static StateEnum _stateChangeFlag = FUN_STATE_DONE;
+static StateEnum _funChangeFlag = STATE_DONE;
+static StateEnum _stateChangeFlag = STATE_DONE;
 static uint8_t _haveNewStateFlag=0;
 static SigFunState _newState;
 
@@ -61,15 +61,6 @@ StateEnum CoreState_getStateChangeFlag(void)
 	return _stateChangeFlag;
 }
 
-uint8_t isStateUndone(StateEnum state)
-{
-	return state == FUN_STATE_UNDONE;
-}
-
-uint8_t isStateDone(StateEnum state)
-{
-	return state == FUN_STATE_DONE;
-}
 
 void setTempFun(pFunction fun)
 {
@@ -129,8 +120,8 @@ void setFlagAndState()
 	//1.1设置状态转换undone
 	//1.2设置函数转换undone
 	//1.3设置函数转换标志exit
-	CoreState_setStateChangeFlag(FUN_STATE_UNDONE);
-	CoreState_setFunChangeFlag(FUN_STATE_UNDONE);
+	CoreState_setStateChangeFlag(STATE_UNDONE);
+	CoreState_setFunChangeFlag(STATE_UNDONE);
 	CoreState_setFunSwitchState(FUN_STATE_EXIT);
 
 	//1.3.1设置新状态，保存旧状态
@@ -144,7 +135,7 @@ void setFlagAndState()
 
 void CoreState_coreFun(void)
 {
-	if (isStateDone(CoreState_getStateChangeFlag()))
+	if (State_isStateDone(CoreState_getStateChangeFlag()))
 	{
 		//1.是否存在新状态待转换
 		if (CoreState_haveNewStateFlag())
@@ -152,7 +143,7 @@ void CoreState_coreFun(void)
 			setFlagAndState();
 		}
 	}
-	if (isStateUndone(CoreState_getFunChangeFlag()))
+	if (State_isStateUndone(CoreState_getFunChangeFlag()))
 	{
 		//根据funChangeFlag获取要执行的函数指针
 		setRunfun(CoreState_getFunSwitchState());

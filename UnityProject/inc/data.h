@@ -2,6 +2,7 @@
 #define __DATA_HP_H
 
 #include <stdint.h>
+#include "stm32f10x.h"
 
 #define TRUE 1
 #define FALSE 0
@@ -9,13 +10,13 @@
 typedef enum{
 	STATE_OFF = 0x00,
 	STATE_ON,
-	FUN_STATE_UNDONE,
-	FUN_STATE_DONE,
+	STATE_UNDONE,
+	STATE_DONE,
 	FUN_STATE_EXIT,
 	FUN_STATE_INIT,
 	FUN_STATE_RUN,
 	FUN_STATE_EXCUTED,
-	FUN_STATE_NULL
+	FUN_STATE_NULL,
 }StateEnum;
 
 typedef StateEnum (*pFunction)(void);
@@ -58,14 +59,19 @@ typedef struct funStruct{
 	SigFunState preFunState;
 }funStruct;
 
+typedef struct  IOControl
+{
+	uint8_t 		name;
+	uint16_t		pin;
+	GPIO_TypeDef*	port;
+	uint32_t		clk;
+}IOControl;
+
 typedef struct dataAllStruct{
 	dataTemStruct dataTemp;
 	dataRelayStruct dataRelay;
 	funStruct	funcRun;
 }dataAllStruct;
-
-
-
 
 
 
@@ -85,4 +91,6 @@ void Data_setPreFunState(SigFunState newFunc);
 SigFunState Data_getPreFunState(void);
 
 #endif
+
+
 

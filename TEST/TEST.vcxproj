@@ -58,7 +58,7 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>../$(Configuration)/UnityProject.lib;odbc32.lib;odbccp32.lib;winmm.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>../$(Configuration)/UnityProject.lib;../stm32fwlib.lib;odbc32.lib;odbccp32.lib;winmm.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <ForceFileOutput>MultiplyDefinedSymbolOnly</ForceFileOutput>
       <LinkStatus>
       </LinkStatus>
@@ -96,13 +96,24 @@
   <ItemGroup>
     <ClCompile Include="..\UnityComm\unity.c" />
     <ClCompile Include="..\UnityComm\unity_fixture.c" />
+    <ClCompile Include="tests\Stm32_ub_spy.c" />
     <ClCompile Include="tests\testUser\CoreStateTest.c" />
     <ClCompile Include="tests\testUser\DataTest.c" />
     <ClCompile Include="tests\testUser\QueueStateTest.c" />
+    <ClCompile Include="tests\testUser\TestINputProcess_data.c" />
+    <ClCompile Include="tests\testUser\TestInputProcess_err.c" />
+    <ClCompile Include="tests\testUser\TestIoDetectErr.c" />
+    <ClCompile Include="tests\testUser\TestStm32_ub_adc.c" />
+    <ClCompile Include="tests\testUser\TestStm32_ub_cd4051.c" />
     <ClCompile Include="tests\test_runners\all_tests.c" />
     <ClCompile Include="tests\test_runners\UserRunners\CoreStateTest_runner.c" />
     <ClCompile Include="tests\test_runners\UserRunners\DataTest_runner.c" />
     <ClCompile Include="tests\test_runners\UserRunners\QueueTest_runner.c" />
+    <ClCompile Include="tests\test_runners\UserRunners\TestINputProcess_dataRunner.c" />
+    <ClCompile Include="tests\test_runners\UserRunners\TestInputProcess_errRunner.c" />
+    <ClCompile Include="tests\test_runners\UserRunners\TestIoDetectErr_runners.c" />
+    <ClCompile Include="tests\test_runners\UserRunners\TestStm32_ub_adc_runners.c" />
+    <ClCompile Include="tests\test_runners\UserRunners\TestStm32_ub_cd4051_runners.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\UnityComm\unity.h" />

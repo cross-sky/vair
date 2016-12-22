@@ -60,6 +60,39 @@
     <ClCompile Include="tests\testUser\CoreStateTest.c">
       <Filter>源文件\testUser</Filter>
     </ClCompile>
+    <ClCompile Include="tests\testUser\TestStm32_ub_adc.c">
+      <Filter>源文件\testUser</Filter>
+    </ClCompile>
+    <ClCompile Include="tests\test_runners\UserRunners\TestStm32_ub_adc_runners.c">
+      <Filter>源文件\test_runners\BspRunner</Filter>
+    </ClCompile>
+    <ClCompile Include="tests\Stm32_ub_spy.c">
+      <Filter>源文件\Spy</Filter>
+    </ClCompile>
+    <ClCompile Include="tests\testUser\TestStm32_ub_cd4051.c">
+      <Filter>源文件\testUser</Filter>
+    </ClCompile>
+    <ClCompile Include="tests\test_runners\UserRunners\TestStm32_ub_cd4051_runners.c">
+      <Filter>源文件\test_runners\BspRunner</Filter>
+    </ClCompile>
+    <ClCompile Include="tests\test_runners\UserRunners\TestINputProcess_dataRunner.c">
+      <Filter>源文件\test_runners\BspRunner</Filter>
+    </ClCompile>
+    <ClCompile Include="tests\testUser\TestINputProcess_data.c">
+      <Filter>源文件\testUser</Filter>
+    </ClCompile>
+    <ClCompile Include="tests\testUser\TestInputProcess_err.c">
+      <Filter>源文件\testUser</Filter>
+    </ClCompile>
+    <ClCompile Include="tests\testUser\TestIoDetectErr.c">
+      <Filter>源文件\testUser</Filter>
+    </ClCompile>
+    <ClCompile Include="tests\test_runners\UserRunners\TestInputProcess_errRunner.c">
+      <Filter>源文件\test_runners\BspRunner</Filter>
+    </ClCompile>
+    <ClCompile Include="tests\test_runners\UserRunners\TestIoDetectErr_runners.c">
+      <Filter>源文件\test_runners\BspRunner</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\UnityComm\unity.h">

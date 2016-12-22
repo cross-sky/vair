@@ -14,7 +14,20 @@
 void __dsb(uint8_t);
 #endif // __dsb_vs
 
+#include "stm32f10x_conf.h"
+#include "stm32f10x.h"
+#include "stm32f10x_it.h"
+
 #include "data.h"
+#include "StateType.h"
+#include "ErrType.h"
+#include "IoDetectErr.h"
+#include "adc_filter.h"
+
+#include "stm32_ub_adc.h"
+#include "stm32_ub_cd4051.h"
+#include "input_process.h"
+
 #include "queue.h"
 #include "RunFunctions.h"
 //#include "ModeState.h"

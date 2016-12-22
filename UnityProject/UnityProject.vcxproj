@@ -11,10 +11,18 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\BSP\stm32_ub_adc.c" />
+    <ClCompile Include="src\BSP\stm32_ub_cd4051.c" />
+    <ClCompile Include="src\USER\adc_filter.c" />
     <ClCompile Include="src\USER\CoreState.c" />
     <ClCompile Include="src\USER\data.c" />
+    <ClCompile Include="src\USER\ErrType.c" />
+    <ClCompile Include="src\USER\input_process.c" />
+    <ClCompile Include="src\USER\IoDetectErr.c" />
     <ClCompile Include="src\USER\queue.c" />
     <ClCompile Include="src\USER\RunFunctions.c" />
+    <ClCompile Include="src\USER\StateType.c" />
+    <ClCompile Include="src\USER\stm32f10x_it.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="inc\cominc.h" />

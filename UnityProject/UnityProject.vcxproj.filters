@@ -33,6 +33,30 @@
     <ClCompile Include="src\USER\RunFunctions.c">
       <Filter>源文件\USER</Filter>
     </ClCompile>
+    <ClCompile Include="src\USER\StateType.c">
+      <Filter>源文件\USER</Filter>
+    </ClCompile>
+    <ClCompile Include="src\BSP\stm32_ub_adc.c">
+      <Filter>源文件\BSP</Filter>
+    </ClCompile>
+    <ClCompile Include="src\USER\stm32f10x_it.c">
+      <Filter>源文件\USER</Filter>
+    </ClCompile>
+    <ClCompile Include="src\BSP\stm32_ub_cd4051.c">
+      <Filter>源文件\BSP</Filter>
+    </ClCompile>
+    <ClCompile Include="src\USER\input_process.c">
+      <Filter>源文件\USER</Filter>
+    </ClCompile>
+    <ClCompile Include="src\USER\ErrType.c">
+      <Filter>源文件\USER</Filter>
+    </ClCompile>
+    <ClCompile Include="src\USER\IoDetectErr.c">
+      <Filter>源文件\USER</Filter>
+    </ClCompile>
+    <ClCompile Include="src\USER\adc_filter.c">
+      <Filter>源文件\USER</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="inc\data.h">
