@@ -57,6 +57,9 @@
     <ClCompile Include="src\USER\adc_filter.c">
       <Filter>源文件\USER</Filter>
     </ClCompile>
+    <ClCompile Include="src\USER\RTdataStruct.c">
+      <Filter>源文件\USER</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="inc\data.h">

@@ -2,7 +2,7 @@
 #define MAX_StopTimes 3
 #define MAX_RunTimes 3
 
-uint8_t waterCheckFlag=0;
+static uint8_t _waterCheckFlag=0;
 
 IODectectErrStruct ioErrDectect[IOERR_MAX] ={
 	{ERR_LOW_PREESURE,IOERR_OFF,0,0,MAX_RunTimes,0},
@@ -118,12 +118,12 @@ void IOERR_checkErr(ErrType errType, uint16_t inXData)
 
 void IODECT_startCheckWaterOpen(void)
 {
-	waterCheckFlag=STATE_ON;
+	_waterCheckFlag=STATE_ON;
 }
 
 void IODECT_stopCheckWaterOpen(void)
 {
-	waterCheckFlag=STATE_OFF;
+	_waterCheckFlag=STATE_OFF;
 	//IOERR_OFF,0,0,MAX_StopTimes,0
 	ioErrDectect[IOERR_WATER_OPEN].state = IOERR_OFF;
 	ioErrDectect[IOERR_WATER_OPEN].stopTimes =0;
@@ -134,6 +134,6 @@ void IODECT_stopCheckWaterOpen(void)
 
 uint8_t IODECT_getFlagCheckWaterOpen(void)
 {
-	return waterCheckFlag;
+	return _waterCheckFlag;
 }
 

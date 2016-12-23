@@ -196,11 +196,11 @@ int16_t iADCTemperCalc50K(uint16_t index,uint16_t adcValue)
 	if (index>=ADC50K_INDEX_MAX )
 	{
 		//@@@@@@return err
-		return 10*(ADC50K_INDEX_MAX + ADC50K_TEMPER_REF -1);;
+		return 10*(ADC50K_INDEX_MAX + ADC50K_TEMPER_REF -1);
 	}
 	else if(index <= ADC50K_INDEX_MIN)
 	{
-		return 10*(ADC50K_INDEX_MIN + ADC50K_TEMPER_REF -1);;
+		return 10*(ADC50K_INDEX_MIN + ADC50K_TEMPER_REF -1);
 	}
 	else{
 		t = 10*(ntcAdc50K[index-1] - adcValue);

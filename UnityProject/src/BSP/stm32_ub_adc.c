@@ -15,11 +15,6 @@ ptrState BspAdc_getPtrStateAdc(void)
 	return &stateADC;
 }
 
-//uint32_t* uINPGetADCaddress(ptrState adcState)
-//{
-//	//need to change
-//	return (uint32_t*)&adcState->cycleTime;
-//}
 
 static StateEnum _adcDoneFlag=STATE_DONE;
 

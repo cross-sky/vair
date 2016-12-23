@@ -23,6 +23,7 @@ void __dsb(uint8_t);
 #include "ErrType.h"
 #include "IoDetectErr.h"
 #include "adc_filter.h"
+#include "RTdataStruct.h"
 
 #include "stm32_ub_adc.h"
 #include "stm32_ub_cd4051.h"
