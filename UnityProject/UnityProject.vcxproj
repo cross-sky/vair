@@ -24,6 +24,7 @@
     <ClCompile Include="src\USER\RunFunctions.c" />
     <ClCompile Include="src\USER\StateType.c" />
     <ClCompile Include="src\USER\stm32f10x_it.c" />
+    <ClCompile Include="src\USER\valve_calc.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="inc\cominc.h" />

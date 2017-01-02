@@ -60,6 +60,9 @@
     <ClCompile Include="src\USER\RTdataStruct.c">
       <Filter>源文件\USER</Filter>
     </ClCompile>
+    <ClCompile Include="src\USER\valve_calc.c">
+      <Filter>源文件\USER</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="inc\data.h">

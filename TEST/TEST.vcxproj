@@ -106,6 +106,7 @@
     <ClCompile Include="tests\testUser\TestRTdataStruct.c" />
     <ClCompile Include="tests\testUser\TestStm32_ub_adc.c" />
     <ClCompile Include="tests\testUser\TestStm32_ub_cd4051.c" />
+    <ClCompile Include="tests\testUser\TestValve_calc.c" />
     <ClCompile Include="tests\test_runners\all_tests.c" />
     <ClCompile Include="tests\test_runners\UserRunners\CoreStateTest_runner.c" />
     <ClCompile Include="tests\test_runners\UserRunners\DataTest_runner.c" />
@@ -116,6 +117,7 @@
     <ClCompile Include="tests\test_runners\UserRunners\TestRTdataStruct_runners.c" />
     <ClCompile Include="tests\test_runners\UserRunners\TestStm32_ub_adc_runners.c" />
     <ClCompile Include="tests\test_runners\UserRunners\TestStm32_ub_cd4051_runners.c" />
+    <ClCompile Include="tests\test_runners\UserRunners\TestValveCalc_runners.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\UnityComm\unity.h" />

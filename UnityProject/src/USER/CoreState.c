@@ -9,11 +9,11 @@ static SigFunState _newState;
 
 static pFunction _tempFun ;
 
-#define Qlen 10
-SigFunState buf[Qlen];
-QueueStruct xQueue ;
 
-void* getQueBufAddr(void)
+static SigFunState buf[QueueLength];
+static QueueStruct xQueue ;
+
+static void* getQueBufAddr(void)
 {
 	return &buf[(xQueue.in+1)%xQueue.maxSize];
 }
@@ -154,7 +154,7 @@ void CoreState_coreFun(void)
 void CoreState_init(void)
 {
 	//1.create queue,len 10, uin16_t
-	Que_create(Qlen, (uint8_t *)&buf, &xQueue);
+	Que_create(QueueLength, (uint8_t *)&buf, &xQueue);
 	_tempFun = RunFun_getRunFun(SIG_FUN_OFF).run;
 }
 

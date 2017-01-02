@@ -4,15 +4,17 @@
 #include <stdint.h>
 #include <string.h>
 
+#define QueueLength 10
+
 typedef struct 
 {
 	uint8_t in;
 	uint8_t out;
 	uint8_t qlength;
 	uint8_t maxSize;
-	uint8_t dataLen[10];
+	uint8_t dataLen[QueueLength];
 	//void* buff;
-	void *buff[10];
+	void *buff[QueueLength];
 }QueueStruct;
 
 uint8_t Que_create(uint8_t len, void* queDataBuf, QueueStruct* queue);

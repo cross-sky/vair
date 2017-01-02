@@ -24,12 +24,15 @@ void __dsb(uint8_t);
 #include "IoDetectErr.h"
 #include "adc_filter.h"
 #include "RTdataStruct.h"
+#include "valve_calc.h"
 
 #include "stm32_ub_adc.h"
 #include "stm32_ub_cd4051.h"
 #include "input_process.h"
 
 #include "queue.h"
+
+
 #include "RunFunctions.h"
 //#include "ModeState.h"
 #include "CoreState.h"

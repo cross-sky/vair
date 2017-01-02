@@ -10,6 +10,7 @@ static void RunAllTests(void)
   RUN_TEST_GROUP(INP_err);
   RUN_TEST_GROUP(User_IODetectErr);
   RUN_TEST_GROUP(INP_err);
+  RUN_TEST_GROUP(ValveCalc);
 }
 
 int main(int argc, const char * argv[])

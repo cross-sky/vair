@@ -99,6 +99,12 @@
     <ClCompile Include="tests\test_runners\UserRunners\TestRTdataStruct_runners.c">
       <Filter>源文件\test_runners\BspRunner</Filter>
     </ClCompile>
+    <ClCompile Include="tests\test_runners\UserRunners\TestValveCalc_runners.c">
+      <Filter>源文件\test_runners\BspRunner</Filter>
+    </ClCompile>
+    <ClCompile Include="tests\testUser\TestValve_calc.c">
+      <Filter>源文件\testUser</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\UnityComm\unity.h">

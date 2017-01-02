@@ -1,6 +1,13 @@
 #include "data.h"
 
 static dataAllStruct dataParam;
+
+dataAllStruct* xQue_getCoreData(void)
+{
+	return &dataParam;
+}
+
+
 void Data_setTargetBoxT(uint16_t targetBoxT)
 {
 	dataParam.dataTemp.targetBoxT = targetBoxT;
@@ -85,3 +92,115 @@ void Data_setPreFunState(SigFunState newFunc)
 	dataParam.funcRun.preFunState = newFunc;
 }
 
+
+int16_t iQUE_getUpperLimit(void)
+{
+	return dataParam.coreParems.setAirout_water;
+}
+
+int16_t iQUE_getWorkerModel(void)
+{
+	return dataParam.coreParems.setWorkMode;
+}
+
+//获取排气温度
+int16_t iQUE_getAirOutTemper(void)
+{
+	return dataParam.coreParems.machineA.outTemper;
+}
+
+//获取吸气温度
+int16_t iQUE_getInTemper(void)
+{
+	return dataParam.coreParems.machineA.inTemper;
+}
+
+//获取蒸发温度
+int16_t iQUE_getEvaporateTemper(void)
+{
+	uint16_t workModel = iQUE_getWorkerModel();
+	if (workModel == SIG_MAKE_COLD)
+	{
+		//制冷时蒸发温度，选择进水探头
+		return dataParam.coreParems.waterIn;
+	}
+	else
+	{
+		//制热时蒸发温度，选择蒸发探头
+		return dataParam.coreParems.machineA.evaporateTemper;
+	}
+}
+
+//获取环境温度
+int16_t iQUE_getEvirTemper(void)
+{
+	return dataParam.coreParems.environT;
+}
+
+//获取水箱温度
+int16_t iQUE_getWaterBankTemper(void)
+{
+	return dataParam.coreParems.waterBank;
+}
+
+int16_t iQUE_getColdModelSuperHeat(void)
+{
+	//排气-水温差来判断
+	int16_t data=0;
+	int16_t temp = iQUE_getAirOutTemper() - iQUE_getWaterBankTemper();
+	if (temp <= 400)
+	{
+		data = 50;
+	}else if(temp >= 700)
+	{
+		data = 20;
+	}else{
+		data = (int16_t)(temp*(-0.1)) + 90;
+	}
+	return data;
+}
+
+int16_t iQUE_getHotWaterModelSuperHeat(void)
+{
+	int16_t data=0;
+	int16_t envirT = iQUE_getEvirTemper();
+	if (envirT > 300)
+	{
+		data = 60;
+	}
+	else if (envirT < -100)
+	{
+		data = 20;
+	}else{
+		//-10时过热度2，0度时过热度3
+		data = (int16_t)(envirT*0.1) + 30;
+	}
+
+	//水温>40度，过热度-1
+	if (iQUE_getWaterBankTemper() >= 400)
+	{
+		data -=10;
+	}
+	return data;
+}
+
+//根据环温，水温确定合适的过热度
+int16_t iQUE_getSuperheat(void)
+{
+	uint16_t workModel = iQUE_getWorkerModel();
+	int16_t value=0;
+	if (workModel == SIG_MAKE_HotWater)
+	{
+		value = iQUE_getHotWaterModelSuperHeat();
+	}
+	else if (workModel == SIG_MAKE_COLD)
+	{
+		value = iQUE_getColdModelSuperHeat();
+	}
+	return value;
+}
+
+void iQUE_setWorkerModel(int16_t newstate)
+{
+	dataParam.coreParems.setWorkMode = newstate;
+}

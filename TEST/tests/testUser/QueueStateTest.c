@@ -2,10 +2,10 @@
 #include "unity.h"
 #include "unity_fixture.h"
 
-#define Qlen 10
+//#define QueueLength 10
 TEST_GROUP(QueueTest);
 
-uint16_t buf[Qlen];
+uint16_t buf[QueueLength];
 QueueStruct xQueue ;
 
 void* getQueBufAddr(void)
@@ -15,7 +15,7 @@ void* getQueBufAddr(void)
 
 TEST_SETUP(QueueTest)
 { 
-	Que_create(Qlen, (uint8_t *)&buf, &xQueue);
+	Que_create(QueueLength, (uint8_t *)&buf, &xQueue);
 }
 
 TEST_TEAR_DOWN(QueueTest)
