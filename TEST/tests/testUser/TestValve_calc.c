@@ -58,7 +58,7 @@ TEST_SETUP(ValveCalc)
 	ValveCalc_init();
 	ValveCalv_changeValveData(testValveData);
 	 queData = xQue_getCoreData();
-	 iQUE_setWorkerModel(SIG_MAKE_HotWater);
+	 Data_init();
 }
 
 TEST_TEAR_DOWN(ValveCalc)
@@ -291,9 +291,7 @@ TEST(ValveCalc, TestValveCalc_calcValveSub)
 	{
 		ValveCalc_checkProcess(ValveSubB);
 	}
-	
 	TEST_ASSERT_EQUAL(0,testValveData[ValveSubB].totalSteps);
-	
 
 	//airout<100 envir<5 airout-water=26
 	water = 30;
@@ -328,7 +326,6 @@ TEST(ValveCalc, TestValveCalc_calcValveSub)
 	envir = 4;
 	setQueDataWaterAiroutEviTemper(water, airout, envir);
 	ValveCalc_calcValveSub(ValveSubB);
-	//ValveCalc_popSig(&tsig);
 	TEST_ASSERT_EQUAL(FALSE,ValveCalc_popSig(&tsig));
 
 	//airout<100 envir<5 airout-water=18
@@ -339,152 +336,4 @@ TEST(ValveCalc, TestValveCalc_calcValveSub)
 	ValveCalc_calcValveSub(ValveSubB);
 	TEST_ASSERT_EQUAL(FALSE,ValveCalc_popSig(&tsig));
 }
-
-//test model change then init essential params
-TEST(ValveCalc, TestValveCalc_HotwaterModelChangeToColdModel)
-{
-	ValveSig_t tsig;
-	//1. change to cool model test max valvestep
-	setInitTestValveData(ValveMainA);
-	iQUE_setWorkerModel(SIG_MAKE_COLD);
-	ValveCalc_WorkerModelChangeParams();
-
-	ValveCalc_popSig(&tsig);
-	//cold init step 30
-	TEST_ASSERT_EQUAL(VALVE_MIN_STEP,tsig.code);
-
-	tsig.code = 200;
-	tsig.sig = valveRun;
-	tsig.kindValue = ValveMainA;
-
-	ValveCalc_pushSig(&tsig);
-	ValveCalc_popSig(&tsig);
-	checkTotalSteps(&tsig);
-	//max step 120
-	TEST_ASSERT_EQUAL(VALVE_COLDMAX_STEP,testValveData[ValveMainA].totalSteps);
-
-	//change to hotwater model ,test max valvestep
-	setInitTestValveData(ValveMainA);
-	iQUE_setWorkerModel(SIG_MAKE_HotWater);
-	ValveCalc_WorkerModelChangeParams();
-
-	ValveCalc_popSig(&tsig);
-	//hot init step 100
-	TEST_ASSERT_EQUAL(VALVE_INITRUN_STEP,tsig.code);
-
-	tsig.code = 500;
-	tsig.sig = valveRun;
-	tsig.kindValue = ValveMainA;
-
-	ValveCalc_pushSig(&tsig);
-	ValveCalc_popSig(&tsig);
-	checkTotalSteps(&tsig);
-	//max step 470
-	TEST_ASSERT_EQUAL(VALVE_MAX_STEP,testValveData[ValveMainA].totalSteps);
-}
-
-TEST(ValveCalc, ColdModelValveCalcCheckProcess)
-{
-	uint16_t i;
-	setInitTestValveData(ValveMainA);
-	iQUE_setWorkerModel(SIG_MAKE_COLD);
-	ValveCalc_WorkerModelChangeParams();
-
-	ValveCalc_checkProcess(ValveMainA);
-
-	for(i=0;i<VALVE_MIN_STEP ;i++)
-	{
-		ValveCalc_valveRun(ValveMainA);
-	}
-
-	//额外10次保持励磁
-	for(i=0;i<=10 ;i++)
-	{
-		ValveCalc_valveRun(ValveMainA);
-	}
-
-	ValveCalc_checkProcess(ValveMainA);
-	TEST_ASSERT_EQUAL(statusDone,testValveData[ValveMainA].valveStatus);
-}
-
-
-//cold back mean forward
-TEST(ValveCalc, ColdModelValveCalcValveMainWhen4TimesBack4TimsFward)
-{
-	ValveSig_t tsig;
-	int16_t water;
-	int16_t airout;
-	int16_t envir;
-
-	water = 20;
-	airout = 90;
-	envir = 4;
-	setQueDataWaterAiroutEviTemper(water, airout, envir);
-	setQueDataColdModelEvaT(5);
-
-	setInitTestValveData(ValveMainA);
-	iQUE_setWorkerModel(SIG_MAKE_COLD);
-	ValveCalc_WorkerModelChangeParams();
-
-	ValveCalc_popSig(&tsig);
-	//1times Back
-	setQueDataInEvaTemper(6,5);
-	setInitTestValveData(0);
-	setQueDataAirOutT(90);
-
-
-	ValveCalc_calcValveMain(ValveMainA);
-	ValveCalc_popSig(&tsig);
-
-	TEST_ASSERT_EQUAL(VALVE_STEPSInit,tsig.code);
-
-	//2times Back
-	ValveCalc_calcValveMain(ValveMainA);
-	ValveCalc_popSig(&tsig);
-
-	TEST_ASSERT_EQUAL(VALVE_STEPSInit,tsig.code);
-
-	//3times Back
-	ValveCalc_calcValveMain(ValveMainA);
-	ValveCalc_popSig(&tsig);
-
-	TEST_ASSERT_EQUAL(VALVE_STEPSInit,tsig.code);
-
-	//4times Back
-	ValveCalc_calcValveMain(ValveMainA);
-	ValveCalc_popSig(&tsig);
-
-	TEST_ASSERT_EQUAL(VALVE_STEPSInit,tsig.code);
-
-	TEST_ASSERT_EQUAL(0,testValveData[ValveMainA].valveCounts);
-
-	//1times foward
-	setInitTestValveData(0);
-	setQueDataInEvaTemper(20,13);
-
-	ValveCalc_calcValveMain(ValveMainA);
-	ValveCalc_popSig(&tsig);
-
-	TEST_ASSERT_EQUAL(valveRun,tsig.sig);
-	TEST_ASSERT_EQUAL(VALVE_STEPSInit*(-1),tsig.code);
-
-	//2times foward
-	ValveCalc_calcValveMain(ValveMainA);
-	ValveCalc_popSig(&tsig);
-
-	TEST_ASSERT_EQUAL(VALVE_STEPSInit*(-1),tsig.code);
-
-	//3times foward
-	ValveCalc_calcValveMain(ValveMainA);
-	ValveCalc_popSig(&tsig);
-
-	TEST_ASSERT_EQUAL(VALVE_STEPSInit*(-1),tsig.code);
-
-	//4times foward
-	ValveCalc_calcValveMain(ValveMainA);
-	ValveCalc_popSig(&tsig);
-
-	TEST_ASSERT_EQUAL(VALVE_STEPSInit*(-1),tsig.code);
-}
-
 

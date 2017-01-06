@@ -70,7 +70,7 @@ void ValveCalc_valveInit(void);
 void ValveCalc_valveClose(ValveKinds valveKind);
 
 void ValveCalc_calcValveSub(ValveKinds valveKind);
-void ValveCalc_WorkerModelChangeParams(void);
+//void ValveCalc_WorkerModelChangeParams(void);
 void ValveCalc_defrostValveSet(void);
 void ValveCalc_stepsSetTo(ValveKinds valveKind, int16_t steps);
 

@@ -130,6 +130,10 @@ uint8_t ValveCalc_getSig(ValveSig_t *sig)
 //队列有个缺点，a 正在工作，而队列下一个是A事件，当b已完成时，无法查找下一个B事件
 uint8_t ValveCalc_pushSig(ValveSig_t *srcSig)
 {
+	if (srcSig->code == 0)
+	{
+		return FALSE;
+	}
 	return ValveCalc_pushStateQue(srcSig);
 }
 
@@ -371,20 +375,13 @@ void valveDirectBack(int16_t subT, int16_t superHeat,ValveKinds valveKind)
 //计算主电子膨胀阀
 void ValveCalc_calcValveMain(ValveKinds valveKind)
 {
-	int16_t workModel = iQUE_getWorkerModel();
 	int16_t superHeat,subT;
 	ValveSig_t sig;
-
 
 	//0.1 排气温度>100,
 	if (iQUE_getAirOutTemper() > AirOutTemperMax100)
 	{
 		sig.code = (iQUE_getAirOutTemper()- AirOutTemperMax100+10)/10;
-		if (workModel == SIG_MAKE_COLD)
-		{
-			//制冷时电子膨胀阀要往小开
-			sig.code = -sig.code;
-		}
 		sig.kindValue = ValveMainA;
 		sig.sig = valveRun;
 		ValveCalc_pushSig(&sig);
@@ -430,10 +427,6 @@ void ValveCalc_calcValveMain(ValveKinds valveKind)
 	//5.发送步数LastStep*ValveDirection, valveRun,
 	//步数*方向 区分正反转
 	sig.code = _prtvalveStatus[valveKind].lastStep*(int16_t)(_prtvalveStatus[valveKind].valveDirection - DirectHold);
-	if (workModel == SIG_MAKE_COLD)
-	{
-		sig.code = -sig.code;
-	}
 	sig.sig = valveRun;
 	sig.kindValue = valveKind;
 	ValveCalc_pushSig(&sig);
@@ -554,69 +547,17 @@ void ValveCalc_defrostValveSet(void)
 	ValveCalc_stepsSetTo(ValveMainA, VALVE_MIN_STEP);
 }
 
-//制冷制热模式切换时，重新设置参数
-void ValveCalc_WorkerModelChangeParams(void)
-{
-	int16_t workModel = iQUE_getWorkerModel();
-
-	switch(workModel)
-	{
-	case SIG_MAKE_COLD:
-		{
-			//1.制冷时电子膨胀阀最大步数120
-			ValveCalc_ChangeTabValveParams(VALVE_COLDMAX_STEP);
-			//2.主电子膨胀阀开度设置到30
-			ValveCalc_stepsSetTo(ValveMainA, VALVE_MIN_STEP);
-			/*valveSig.sig = valveRun ;
-			valveSig.code = VALVE_MIN_STEP - getValveTotalStep(ValveMainA);
-			valveSig.kindValue = ValveMainA;
-			ValveCalc_pushSig(&valveSig);*/
-			break;
-		}
-	case SIG_MAKE_HotWater:
-		{
-			//1.制冷时电子膨胀阀最大步数470
-			ValveCalc_ChangeTabValveParams(VALVE_MAX_STEP);
-			//2.主电子膨胀阀开度设置到100
-			/*valveSig.sig = valveRun;
-			valveSig.code = VALVE_INITRUN_STEP  - getValveTotalStep(ValveMainA);
-			valveSig.kindValue = ValveMainA;
-			ValveCalc_pushSig(&valveSig);*/
-			ValveCalc_stepsSetTo(ValveMainA, VALVE_INITRUN_STEP);
-			break;
-		}
-	default:break;
-	}
-}
-
-
-
 void vTask_valveCalc(void)
 {	
 	//100ms * 10 * 120s
 	static uint16_t i=0;
-	ValveSig_t sig;
 	if (ValveClac_getStartFlag() == STATE_ON)
 	{
 		i++;
 		if (i>=900)
 		{
 			ValveCalc_calcValveMain(ValveMainA);
-
-			if (iQUE_getWorkerModel() == SIG_MAKE_HotWater)
-			{
-				ValveCalc_calcValveSub(ValveSubB);
-			}
-			else{
-				//1. 如果补齐阀是打开的，则关闭，
-				if (getValveTotalStep(ValveSubB) != 0)
-				{
-					sig.code = 500;	//any value but 0
-					sig.kindValue = ValveSubB;
-					sig.sig = valveClose;
-					ValveCalc_pushSig(&sig);
-				}
-			}
+			ValveCalc_calcValveSub(ValveSubB);
 			i=0;
 		}
 

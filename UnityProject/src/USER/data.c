@@ -7,7 +7,6 @@ dataAllStruct* xQue_getCoreData(void)
 	return &dataParam;
 }
 
-
 void Data_setTargetBoxT(uint16_t targetBoxT)
 {
 	dataParam.dataTemp.targetBoxT = targetBoxT;
@@ -98,11 +97,6 @@ int16_t iQUE_getUpperLimit(void)
 	return dataParam.coreParems.setAirout_water;
 }
 
-int16_t iQUE_getWorkerModel(void)
-{
-	return dataParam.coreParems.setWorkMode;
-}
-
 //获取排气温度
 int16_t iQUE_getAirOutTemper(void)
 {
@@ -118,17 +112,20 @@ int16_t iQUE_getInTemper(void)
 //获取蒸发温度
 int16_t iQUE_getEvaporateTemper(void)
 {
-	uint16_t workModel = iQUE_getWorkerModel();
-	if (workModel == SIG_MAKE_COLD)
-	{
-		//制冷时蒸发温度，选择进水探头
-		return dataParam.coreParems.waterIn;
-	}
-	else
-	{
-		//制热时蒸发温度，选择蒸发探头
-		return dataParam.coreParems.machineA.evaporateTemper;
-	}
+	////uint16_t workModel = iQUE_getWorkerModel();
+	//if (workModel == SIG_MAKE_COLD)
+	//{
+	//	//制冷时蒸发温度，选择进水探头
+	//	return dataParam.coreParems.waterIn;
+	//}
+	//else
+	//{
+	//	//制热时蒸发温度，选择蒸发探头
+	//	return dataParam.coreParems.machineA.evaporateTemper;
+	//}
+
+	//制热时蒸发温度，选择蒸发探头
+	return dataParam.coreParems.machineA.evaporateTemper;
 }
 
 //获取环境温度
@@ -187,20 +184,34 @@ int16_t iQUE_getHotWaterModelSuperHeat(void)
 //根据环温，水温确定合适的过热度
 int16_t iQUE_getSuperheat(void)
 {
-	uint16_t workModel = iQUE_getWorkerModel();
-	int16_t value=0;
-	if (workModel == SIG_MAKE_HotWater)
-	{
-		value = iQUE_getHotWaterModelSuperHeat();
-	}
-	else if (workModel == SIG_MAKE_COLD)
-	{
-		value = iQUE_getColdModelSuperHeat();
-	}
-	return value;
+//	uint16_t workModel = iQUE_getWorkerModel();
+	//int16_t value=0;
+	//if (workModel == SIG_MAKE_HotWater)
+	//{
+	//	value = iQUE_getHotWaterModelSuperHeat();
+	//}
+	//else if (workModel == SIG_MAKE_COLD)
+	//{
+	//	value = iQUE_getColdModelSuperHeat();
+	//}
+	//return value;
+
+	return iQUE_getHotWaterModelSuperHeat();
 }
 
-void iQUE_setWorkerModel(int16_t newstate)
+
+//int16_t iQUE_getWorkerModel(void)
+//{
+//	return dataParam.coreParems.setWorkMode;
+//}
+
+
+//void iQUE_setWorkerModel(int16_t newstate)
+//{
+//	dataParam.coreParems.setWorkMode = newstate;
+//}
+
+void Data_init(void)
 {
-	dataParam.coreParems.setWorkMode = newstate;
+	dataParam.coreParems.setAirout_water = 20 * 10;
 }

@@ -83,7 +83,7 @@ typedef struct{
 	int16_t setCurrentProtectMax;	//电流保护基准
 	int16_t setPhaseProtect;		//相位保护
 
-	int16_t setWorkMode;			//制冷还是制热
+//	int16_t setWorkMode;			//制冷还是制热
 	int16_t setColdWaterT;			//制冷温度
 	//。。。。..
 	uint16_t errState;	//err错误状态
@@ -143,17 +143,21 @@ SigFunState Data_getCurrentFunState(void);
 void Data_setPreFunState(SigFunState newFunc);
 SigFunState Data_getPreFunState(void);
 
+//int16_t iQUE_getWorkerModel(void);
+//void iQUE_setWorkerModel(int16_t newstate);
 
 int16_t iQUE_getUpperLimit(void);
-int16_t iQUE_getWorkerModel(void);
+
 int16_t iQUE_getAirOutTemper(void);
 int16_t iQUE_getInTemper(void);
 int16_t iQUE_getEvaporateTemper(void);
 int16_t iQUE_getSuperheat(void);
 dataAllStruct* xQue_getCoreData(void);
-void iQUE_setWorkerModel(int16_t newstate);
+
 int16_t iQUE_getWaterBankTemper(void);
 int16_t iQUE_getEvirTemper(void);
+
+void Data_init(void);
 #endif
 
 
