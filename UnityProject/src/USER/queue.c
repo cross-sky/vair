@@ -1,5 +1,6 @@
 #include "cominc.h"
 
+
 uint8_t Que_create(uint8_t len, void* queDataBuf, QueueStruct* queue)
 {
 	queue->in = 0;
